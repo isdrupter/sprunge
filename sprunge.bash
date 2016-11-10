@@ -1,33 +1,36 @@
 #!/bin/bash
 ####################################################
-# Sprunge Bash Client - Shellz 2016
+# Smart Sprunge Bash Client - Shellz 2016
+####################################################
 
+# Turn on debug messages here
 debug(){
 return 1
-
+#return 0
 }
-
+# Turn on verbose debug messages here
 Verbose(){
-
 return 0
+#return 0
 }
 
 usage(){
 echo -e "$0 'file' \n cmd|$0 \n $0 '<cmd'"
-
 }
 
+# Make sure we're in the right directory
 cwd=$(pwd)
 cd "$cwd"
 cmd="$@"
 
+# Display some help...
 case "cmd" in
 -h|--help)
 usage
 exit 1
 ;;
 esac
-
+# ...or process the input
 if readlink /proc/$$/fd/0 | grep -q "^pipe:"; then
     Verbose && echo 'Pipe input (echo abc | spr)'
     cat </dev/stdin | curl -F 'sprunge=<-' http://sprunge.us
@@ -51,8 +54,12 @@ elif file $( readlink /proc/$$/fd/0 ) | grep -q "character special"; then
   if ([[ "$?" -ne "0" ]] || [[ -z "$spr" ]]) ; then
     echo 'Error: file is empty!';exit 1
   else
-   debug && echo -e " \n################################\nSending : \n################################\n" && cat $spr && echo -e '################################\n'
-    cat $spr | curl -F 'sprunge=<-' http://sprunge.us
+   debug &&\
+   echo -e " \n################################\nSending : \n################################\n" &&\
+   cat $spr && echo -e '################################\n'
+   
+   cat $spr | curl -F 'sprunge=<-' http://sprunge.us
+   
   fi
   rm $spr
 
