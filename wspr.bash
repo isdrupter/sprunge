@@ -4,8 +4,14 @@
 # Even Smarter Sprunge Bash Client - Shellz 2017
 # sprunge.me service provided by OSS
 ####################################################
+#
 
-# Turn on debug messages here
+# variables
+# choose a sprunge service
+#spr_srv='sprunge.us'
+spr_srv='http://compst.io'
+
+#Turn on debug messages here
 debug(){
 return 1
 #return 0
@@ -35,7 +41,7 @@ esac
 # ...or process the input
 if readlink /proc/$$/fd/0 | grep -q "^pipe:"; then
     Verbose && echo 'Pipe input (echo abc | spr)'
-    wget sprunge.me --post-data="p=$(cat </dev/stdin)" -qO-
+    wget $spr_srv --post-data="p=$(cat </dev/stdin)" -qO-
     exit
 elif file $( readlink /proc/$$/fd/0 ) | grep -q "character special"; then
     Verbose && echo 'Terminal input (keyboard/spr file)'
@@ -60,7 +66,7 @@ elif file $( readlink /proc/$$/fd/0 ) | grep -q "character special"; then
    echo -e " \n################################\nSending : \n################################\n" &&\
    cat $spr && echo -e '################################\n'
    
-    wget sprunge.me --post-data="p=$(cat $spr)" -qO-
+    wget $spr_srv --post-data="p=$(cat $spr)" -qO-
    
   fi
   rm $spr
@@ -68,7 +74,7 @@ elif file $( readlink /proc/$$/fd/0 ) | grep -q "character special"; then
 
 else
   Verbose && echo 'File input (spr < file.txt)'
-  wget sprunge.me --post-data="p=$(cat </dev/stdin)" -qO-
+  wget $spr_srv --post-data="p=$(cat </dev/stdin)" -qO-
   exit
 fi
 
