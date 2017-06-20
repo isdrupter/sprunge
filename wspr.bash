@@ -2,7 +2,6 @@
 ####################################################
 # wspr[uhkek]
 # Even Smarter Sprunge Bash Client - Shellz 2017
-# sprunge.me service provided by OSS
 ####################################################
 #
 
