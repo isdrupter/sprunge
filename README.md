@@ -1,7 +1,8 @@
 # sprunge
 A Smart Sprunge Client in Bash
 
-## Wget Sprunge Forked Service Now Available (Thanks OSS) : http://compst.io
+## Wget Sprunge Forked Service Now Available <br> 
+(Thanks OSS) : http://compst.io
 =====
 
 ### Examples:
